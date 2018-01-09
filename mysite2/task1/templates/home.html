@@ -1,21 +1,77 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Homepage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
+
+
 <body>
-<p> homepage</p>
+
+
          {%if f%}
         <p>{{f}}</p>
-        {%endif%}
-        <form method="post" name="adduser"> {% csrf_token %}
-            <input type="text" placeholder="name" name="username"><br>
-            <input type="password" placeholder="type password" name="password"><br>
-            <input type="submit"  value="add user">
+         {%endif%}
 
-        </form>
-<a href="/users">view userlist</a>
+
+<div class="container">
+ <h2 ><em>Page to add users</em></h2>
+  <form id="form">
+      {%csrf_token%}
+
+       <div class="form-group">
+      <label for="name">Username:</label>
+      <input type="text" class="form-control" id="name" placeholder="Enter username" name="name">
+      </div>
+      <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+      </div>
+     <div class="form-group">
+         <label for="pwd">Password:</label>
+         <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+     </div>
+    <div class="checkbox">
+      <label><input type="checkbox" name="remember"> Remember me</label>
+    </div>
+    <button type="submit" class="btn btn-default" onclick="apiCall()">add user</button>
+  </form>
+</div>
 
 </body>
 </html>
+
+{% block javascript %}
+  <script>
+  function apiCall(){
+  var form = $(this).closest("form");
+  alert(form.name)
+  }
+    $("#name").change(function () {
+      var form = $(this).closest("form");
+      $.ajax({
+        url: form.attr("data-create_users-url"),
+        data: form.serialize(),
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            alert(data.error_message);
+          }
+        }
+      });
+
+    });
+  </script>
+{% endblock %}
+</body>
+
+</html>
+

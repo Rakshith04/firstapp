@@ -1,0 +1,22 @@
+ body {
+       background-image:url(img_fjords.jpg);
+       background-repeat:no-repeat;
+       background-size: cover;
+
+ }
+
+ form {
+
+        position:fixed;
+        top:20%;
+        left:35%;
+        width:30%;
+}
+
+h2 {
+    text-align:centre;
+    color:black;
+
+ }
+
+

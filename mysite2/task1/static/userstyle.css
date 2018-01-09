@@ -1,0 +1,35 @@
+ body {
+       background-image:url(img_forest.jpg);
+       background-position:0,0;
+       background-repeat:no-repeat;
+       background-size: cover;
+ }
+
+
+ form {
+        position:fixed;
+        top:20%;
+        left:35%;
+        width:30%;
+ }
+
+p {
+    color:white;
+
+  }
+
+
+a {
+    font-weight:bold;
+    font-color:white;
+    font-size: 200%;
+}
+
+label,em {
+            color:white;
+
+}
+
+span {
+      text-align:right;
+}
